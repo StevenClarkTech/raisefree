@@ -9,7 +9,7 @@ app.secret_key = 'lj)0di6i8jop#7$hk&)a9%92@0n6kf96jjm4m2p^j6h^(o(%+7'
 def home():
 	return render_template('index.html')
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
 	return render_template('dashboard.html')
 
