@@ -20,7 +20,6 @@ def home():
 	if request.method == 'POST':
 
 		if 'username_input' in request.form.keys(): # if signup credentials were posted
-			flash('nothing in the keys')
 			username, password, email = request.form['username_input'], request.form['password_input'], request.form['email_input']
 			# above line assigns the inputted signup credentials
 			conn = database_connection()
@@ -52,10 +51,7 @@ def home():
 			curs = conn.cursor()
 			curs.execute('SELECT id FROM users ORDER BY id;')
 			existing_ids = curs.fetchall()
-			if len(existing_ids) == 0:
-				new_id = 0
-			else:
-				new_id = existing_ids[-1] + 1
+			new_id = existing_ids[-1][0] + 1
 			curs.execute('INSERT INTO users VALUES (%s, %s, %s, %s);', (new_id, username, password, email))
 			conn.commit()
 			conn.close()
