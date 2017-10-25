@@ -16,6 +16,7 @@ def database_connection():
 @app.route('/', methods=['GET', 'POST'])
 def home():
 	if request.method == 'POST':
+		print(request.form)
 		if 'email_input' in request.form.keys(): # if signup credentials were posted
 			flash('post recognized')
 			username, password, email = request.form['username_input'], request.form['password_input'], request.form['email_input']

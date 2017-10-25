@@ -38,7 +38,7 @@
 			<form action="" method="post">
 				<div class="form-group">
 				<label for="exampleInputEmail1">Email address</label>
-				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{request.form.email_input}}">
+				<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{request.form.email_input}}" name="email_input">
 				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 				</div>
 
@@ -46,16 +46,16 @@
 				<label for="inputUsername">Username</label>
 				<div class="input-group mb-2 mb-sm-0">
 		        <div class="input-group-addon">@</div>
-				<input type="text" placeholder="Username" name="username" value="{{request.form.username_input}}">
+				<input type="text" class="form-control" placeholder="Username" name="username_input" value="{{request.form.username_input}}">
 
 				</div>
 
 				<div class="form-group">
 				<label for="exampleInputPassword1">Password</label>
-				<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{request.form.password_input}}">
+				<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{request.form.password_input}}"  name="password_input">
 				</div>
 				
-				<button type="submit" class="btn btn-primary">Login</button>
+				<button type="submit" class="btn btn-primary">Sign Up</button>
 			</form>
 		</div>
 		</div>
