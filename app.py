@@ -70,6 +70,13 @@ def home():
 def dashboard():
 	return render_template('dashboard.html')
 
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+	return render_template('login.html')
+
+@app.route('/signup/', methods=['GET', 'POST'])
+def singup():
+	return render_template('index.html')
 #start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
