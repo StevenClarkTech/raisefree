@@ -1,4 +1,4 @@
-@media (max-width:767px) {
+@media (max-width:568px) {
   .contents-titles-section p.paragraph-title {
     width: 100%;
   }
@@ -10,7 +10,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:568px) {
   .home .section-right-home .box-me .contents-header-home h2 {
     font-size: 60px;
   }
@@ -43,7 +43,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:568px) {
   .about .about-box-info:nth-child(3) {
     float: right;
   }
@@ -61,7 +61,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:568px) {
   .welcome-services .welcome-sev p {
     width: 100%;
   }
@@ -95,7 +95,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:568px) {
   .skills .box-what-i-do-img {
     padding: 0;
     display: none;
@@ -114,7 +114,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width:568px) {
   .box-w-info .contents-talk-me h2 {
     font-size: 35px;
   }
