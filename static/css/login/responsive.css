@@ -1,1 +1,127 @@
-@media (max-width:767px){.contents-titles-section p.paragraph-title{width:100%}}@media (max-width:300px){.about .about-box-story .about-story h2,.contents-titles-section h2.section-title,.welcome-services .welcome-sev h2{font-size:30px}}@media (max-width:767px){.home .section-right-home .box-me .contents-header-home h2{font-size:60px}.home .section-left-home{display:none}.about .about-box-story .about-story h2{margin-bottom:12%}.about .about-box-story .about-story h3{font-size:20px}}@media (max-width:414px){#wrapper.toggled #sidebar-wrapper{width:100%}.hamburger.is-open .hamb-bottom,.hamburger.is-open .hamb-middle,.hamburger.is-open .hamb-top{background-color:#fff}.sidebar-nav li a{font-size:20px;line-height:2}}@media (max-width:767px){.about .about-box-info:nth-child(3){float:right}}@media (max-width:344px){.about .about-box-story .about-story button.btn-download-cv{margin:0}}@media (max-width:332px){.about .about-box-story .about-story button{margin-bottom:20px}}@media (max-width:767px){.welcome-services .welcome-sev p{width:100%}}@media (max-width:930px){.service p{width:100%}}@media (max-width:930px){.services .box-services:nth-child(5){float:right}.box-services{border-bottom:1px solid rgba(204,204,204,.45);border-left:1px solid rgba(204,204,204,.45)}}@media (max-width:430px){.box-services{width:100%;border-bottom:1px dashed #ccc}.spaceing-service .box-services:nth-child(1),.spaceing-service .box-services:nth-child(2),.spaceing-service .box-services:nth-child(3){border-bottom:1px dashed #ccc}}@media (max-width:767px){.skills .box-what-i-do-img{padding:0;display:none}}@media (max-width:500px){.ox-what-i-do p{width:100%}}@media (max-width:344px){.ox-what-i-do h2{line-height:2}}@media (max-width:767px){.box-w-info .contents-talk-me h2{font-size:35px}.w-btn-contant-me button.btn{padding:3% 12%;margin-top:36px;margin:auto}}
+@media (max-width:767px) {
+  .contents-titles-section p.paragraph-title {
+    width: 100%;
+  }
+}
+
+@media (max-width:300px) {
+  .about .about-box-story .about-story h2,.contents-titles-section h2.section-title,.welcome-services .welcome-sev h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width:767px) {
+  .home .section-right-home .box-me .contents-header-home h2 {
+    font-size: 60px;
+  }
+
+  .home .section-left-home {
+    display: none;
+  }
+
+  .about .about-box-story .about-story h2 {
+    margin-bottom: 12%;
+  }
+
+  .about .about-box-story .about-story h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width:414px) {
+  #wrapper.toggled #sidebar-wrapper {
+    width: 100%;
+  }
+
+  .hamburger.is-open .hamb-bottom,.hamburger.is-open .hamb-middle,.hamburger.is-open .hamb-top {
+    background-color: #fff;
+  }
+
+  .sidebar-nav li a {
+    font-size: 20px;
+    line-height: 2;
+  }
+}
+
+@media (max-width:767px) {
+  .about .about-box-info:nth-child(3) {
+    float: right;
+  }
+}
+
+@media (max-width:344px) {
+  .about .about-box-story .about-story button.btn-download-cv {
+    margin: 0;
+  }
+}
+
+@media (max-width:332px) {
+  .about .about-box-story .about-story button {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width:767px) {
+  .welcome-services .welcome-sev p {
+    width: 100%;
+  }
+}
+
+@media (max-width:930px) {
+  .service p {
+    width: 100%;
+  }
+}
+
+@media (max-width:930px) {
+  .services .box-services:nth-child(5) {
+    float: right;
+  }
+
+  .box-services {
+    border-bottom: 1px solid rgba(204,204,204,.45);
+    border-left: 1px solid rgba(204,204,204,.45);
+  }
+}
+
+@media (max-width:430px) {
+  .box-services {
+    width: 100%;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .spaceing-service .box-services:nth-child(1),.spaceing-service .box-services:nth-child(2),.spaceing-service .box-services:nth-child(3) {
+    border-bottom: 1px dashed #ccc;
+  }
+}
+
+@media (max-width:767px) {
+  .skills .box-what-i-do-img {
+    padding: 0;
+    display: none;
+  }
+}
+
+@media (max-width:500px) {
+  .ox-what-i-do p {
+    width: 100%;
+  }
+}
+
+@media (max-width:344px) {
+  .ox-what-i-do h2 {
+    line-height: 2;
+  }
+}
+
+@media (max-width:767px) {
+  .box-w-info .contents-talk-me h2 {
+    font-size: 35px;
+  }
+
+  .w-btn-contant-me button.btn {
+    padding: 3% 12%;
+    margin-top: 36px;
+    margin: auto;
+  }
+}
