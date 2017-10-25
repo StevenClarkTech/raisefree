@@ -1,0 +1,24 @@
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url(/513966e260bb7610d47b2329dba194143831893e/24dd8/fonts/opensans/opensans-regular.ttf);
+}
+
+@font-face {
+  font-family:Raleway;
+  src:url(/6d05656d68df61514a3e30b569caf7b4b581d069/6c070/fonts/raleway/raleway.ttf);
+}
+
+@font-face {
+  font-family:Montserrat-Light;
+  src:url(/17468b8eb82a8e64d6d0073c2477f101efb7264d/9640a/fonts/montserrat/montserrat-light.ttf);
+}
+
+@font-face {
+  font-family:Montserrat-Bold;
+  src:url(/8f23dacf7d2f4aa9be53c957f48009f610965be5/ed211/fonts/montserrat/montserrat-bold.ttf);
+}
+
+@font-face {
+  font-family:Montserrat-Medium;
+  src:url(/d7ddcd6682a72ff6044cf2015a71b183494ce320/dc1f3/fonts/montserrat/montserrat-medium.ttf);
+}
