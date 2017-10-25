@@ -46,16 +46,18 @@
 				<label for="inputUsername">Username</label>
 				<div class="input-group mb-2 mb-sm-0">
 		        <div class="input-group-addon">@</div>
-				<input type="text" class="form-control" placeholder="Username" name="username_input" value="{{request.form.username_input}}">
+
+				<input type="text" class="form-control" id="username" placeholder="Username" value="{{request.form.username_input}}" name="username_input">
 
 				</div>
 
 				<div class="form-group">
 				<label for="exampleInputPassword1">Password</label>
-				<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{request.form.password_input}}"  name="password_input">
+
+				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{request.form.password_input}}" name="password_input">
 				</div>
 				
-				<button type="submit" class="btn btn-primary">Sign Up</button>
+				<input class="btn btn-default" type="submit" value="Login">
 			</form>
 		</div>
 		</div>

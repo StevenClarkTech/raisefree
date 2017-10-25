@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 from functools import wraps
 import string
+import subprocess
+import psycopg2
 
 app = Flask(__name__)
 
@@ -16,9 +18,9 @@ def database_connection():
 @app.route('/', methods=['GET', 'POST'])
 def home():
 	if request.method == 'POST':
-		print(request.form)
-		if 'email_input' in request.form.keys(): # if signup credentials were posted
-			flash('post recognized')
+
+		if 'username_input' in request.form.keys(): # if signup credentials were posted
+			flash('nothing in the keys')
 			username, password, email = request.form['username_input'], request.form['password_input'], request.form['email_input']
 			# above line assigns the inputted signup credentials
 			conn = database_connection()
@@ -50,7 +52,10 @@ def home():
 			curs = conn.cursor()
 			curs.execute('SELECT id FROM users ORDER BY id;')
 			existing_ids = curs.fetchall()
-			new_id = existing_ids[-1] + 1
+			if len(existing_ids) == 0:
+				new_id = 0
+			else:
+				new_id = existing_ids[-1] + 1
 			curs.execute('INSERT INTO users VALUES (%s, %s, %s, %s);', (new_id, username, password, email))
 			conn.commit()
 			conn.close()
