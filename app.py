@@ -1,19 +1,27 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 from functools import wraps
-import string
-import subprocess
 import psycopg2
+import os
+import urlparse
+import read_env
+import string
 
 app = Flask(__name__)
 
 app.secret_key = 'lj)0di6i8jop#7$hk&)a9%92@0n6kf96jjm4m2p^j6h^(o(%+7'
 
+read_env.read_env()
+urlparse.uses_netloc.append("postgres")
+db_url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
 # we define this function here so we don't have to keep specifying the database address
-def database_connection():
-    proc = subprocess.Popen('heroku config:get DATABASE_URL -a raisefree-01', stdout=subprocess.PIPE, shell=True)
-    db_url = proc.stdout.read().decode('utf-8').strip() + '?sslmode=require'
-    conn = psycopg2.connect(db_url)
-    return conn
+def database_connection(db_url):
+	return psycopg2.connect(
+		database = db_url.path[1:],
+		user = db_url.username,
+		password = db_url.password,
+		host = db_url.hostname,
+		port = db_url.port)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -22,7 +30,7 @@ def home():
 		if 'username_input' in request.form.keys(): # if signup credentials were posted
 			username, password, email = request.form['username_input'], request.form['password_input'], request.form['email_input']
 			# above line assigns the inputted signup credentials
-			conn = database_connection()
+			conn = database_connection(db_url)
 			curs = conn.cursor()
 			curs.execute('SELECT username, email FROM users;')
 			existing_user_credentials = curs.fetchall()
@@ -47,7 +55,7 @@ def home():
 				return redirect(url_for('home'))
 
 			#else, proceed to make the account
-			conn = database_connection()
+			conn = database_connection(db_url)
 			curs = conn.cursor()
 			curs.execute('SELECT id FROM users ORDER BY id;')
 			existing_ids = curs.fetchall()
