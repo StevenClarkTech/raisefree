@@ -42,9 +42,12 @@ def login_required(f):
 # if the user is inactive for 12 hours or more, they are logged out
 @app.before_request
 def make_session_permanent():
-	if session['logged_in'] == True:
-		session.permanent = True
-		app.permanent_session_lifetime = datetime.timedelta(hours=12)
+	try:
+		if session['logged_in'] == True:
+			session.permanent = True
+			app.permanent_session_lifetime = datetime.timedelta(hours=12)
+	except KeyError:
+		pass
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
@@ -67,7 +70,7 @@ def login():
 			return redirect(url_for('login'))
 		elif 'user' in session.keys():
 			flash('You\'re already logged in! You have to log out first.')
-			return redirect(url_for('login'))
+			return redirect(url_for('dashboard'))
 		else:
 			session['logged_in'] = True
 			conn = database_connection(db_url = db_url)
