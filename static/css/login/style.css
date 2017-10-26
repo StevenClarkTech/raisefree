@@ -355,9 +355,14 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(250,250,250,.8);
+  background-color: rgba(250,250,250,1.0);
   z-index: 1;
 }
+
+.overlay h1{
+  color: white;
+}
+
 
 .home .section-left-home,.home .section-right-home {
   padding: 0;
