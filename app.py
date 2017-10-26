@@ -43,7 +43,7 @@ def login_required(f):
 @app.before_request
 def make_session_permanent():
 	try:
-		if session['logged_in'] == True:
+		if 'logged_in' in session:
 			session.permanent = True
 			app.permanent_session_lifetime = datetime.timedelta(hours=12)
 	except KeyError:
@@ -83,7 +83,7 @@ def login():
 			return redirect('/')
 	return render_template('login.html')
 
-@app.route('/create_account', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def create_account():
 	if request.method == 'POST':
 
@@ -139,6 +139,14 @@ def create_account():
 			## and redirected to the dashboard
 			return redirect(url_for('login')) #for the time being, just go to the login page
 	return render_template('index.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+	session.pop('logged_in', None)
+	session.pop('user', None)
+	flash('You were just logged out')
+	return redirect(url_for('dashboard'))
 
 
 
