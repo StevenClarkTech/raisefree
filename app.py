@@ -141,7 +141,6 @@ def create_account():
 	return render_template('index.html')
 
 @app.route('/logout')
-@login_required
 def logout():
 	session.pop('logged_in', None)
 	session.pop('user', None)
