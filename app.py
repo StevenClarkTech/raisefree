@@ -10,7 +10,11 @@ import datetime
 app = Flask(__name__)
 
 app.secret_key = 'lj)0di6i8jop#7$hk&)a9%92@0n6kf96jjm4m2p^j6h^(o(%+7'
+<<<<<<< Updated upstream
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 60 #may want to change this?
+=======
+app.send_file_max_age_default = 0 #move this over to .env eventually?
+>>>>>>> Stashed changes
 
 # reading in the database address
 read_env.read_env()
