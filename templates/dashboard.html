@@ -2,223 +2,308 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <title>RaiseFree</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+  <title>RaiseFree</title>
 
-    <!-- Styles required by   <!-- Icons -->
-    <link href="../static/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../static/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <!-- Styles required by   <!-- Icons -->
+  <link href="../static/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../static/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
-    <!-- Main styles for this application -->
-    <link href="../static/style.css" rel="stylesheet">
+  <!-- Main styles for this application -->
+  <link href="../static/style.css" rel="stylesheet">
 
 </head>
 
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-    <header class="app-header navbar">
-        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
 
 
-        <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">RaiseFree</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#basicModal">Create</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">Settings</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav ml-auto">
+    <ul class="nav navbar-nav d-md-down-none">
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">RaiseFree</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#basicModal">Create</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="img/avatars/6.jpg" class="img-avatar" alt="@username">
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <img src="img/avatars/6.jpg" class="img-avatar" alt="@username">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
 
-                    <div class="dropdown-header text-center">
-                        <strong>Settings</strong>
-                    </div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-                    <a class="dropdown-item" href="logout"><i class="fa fa-lock"></i> Logout</a>
-                </div>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
-            </li>
-
-        </ul>
-
-
-    </header>
-
-    <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="nav">
-
-
-                    <li class="nav-title">
-                        General
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Home </a>
-                    </li>
-
-                    <li class="divider"></li>
-                    <li class="nav-title">
-                        Groups
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<group/id>.html"><i class="icon-star"></i> Harvard Poker Club</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<group/id>.html"><i class="icon-star"></i> Virtual K310 </a>
-                    </li>
-
-
-                </ul>
-            </nav>
-            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+          <div class="dropdown-header text-center">
+            <strong>Settings</strong>
+          </div>
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+          <a class="dropdown-item" href="logout"><i class="fa fa-lock"></i> Logout</a>
         </div>
+      </li>
+      <li class="nav-item d-md-down-none">
+        <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+      </li>
 
-        <!-- Main content -->
+    </ul>
+
+
+  </header>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav">
+
+
+          <li class="nav-title">
+            General
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Home </a>
+          </li>
+
+          <li class="divider"></li>
+          <li class="nav-title">
+            Groups
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<group/id>.html"><i class="icon-star"></i> Harvard Poker Club</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<group/id>.html"><i class="icon-star"></i> Virtual K310 </a>
+          </li>
+
+
+        </ul>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+
+    <!-- Main content -->
     <main class="main">
 
       <!-- Breadcrumb -->
       <ol></ol>
 
       <div class="container-fluid">
-        <div class="animated fadeIn">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fa fa-align-justify"></i> Harvard Poker Club
-                </div>
-                <div class="card-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Username</th>
-                        <th>P/L</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>@Rahsaan</td>
-                        <td>+$100,000</td>
-                      </tr>                     
-                      <tr>
-                        <td>@Steven</td>
-                        <td>+$1302</td>
-                      </tr>
-                      <tr>
-                        <td>@Anthony</td>
-                        <td>+$722</td>
-                      </tr>
-                      <tr>
-                        <td>@Austin</td>
-                        <td>+$102</td>
-                      </tr>    
-                      <tr>
-                        <td>@RF</td>
-                        <td>+$602</td>
-                      </tr>
-                      <tr>
-                        <td>@JP</td>
-                        <td>-$2302</td>
-                      </tr>   
-                      <tr>
-                        <td>@Chambers</td>
-                        <td>-$87,302</td>
-                      </tr>
-                    </tbody>
-                  </table>
 
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                  <i class="fa fa-align-justify"></i> Harvard Poker Club
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12 col-lg-12">
+                    <table class="table">
+	                    <thead>
+	                      <tr>
+	                        <th>Username</th>
+	                        <th>P/L</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody>
+	                      <tr>
+	                        <td>@Rahsaan</td>
+	                        <td>+$100,000</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@Steven</td>
+	                        <td>+$1302</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@Anthony</td>
+	                        <td>+$722</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@Austin</td>
+	                        <td>+$102</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@RF</td>
+	                        <td>+$602</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@JP</td>
+	                        <td>-$2302</td>
+	                      </tr>
+	                      <tr>
+	                        <td>@Chambers</td>
+	                        <td>-$87,302</td>
+	                      </tr>
+	                    </tbody>
+	                  </table> 
+                  </div>
+                  <!--/.col-->
+
+
+
+
+                  <!--/.col-->
                 </div>
+              
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Game</th>
+                      <th>Table</th>
+                      <th>Players</th>
+                      <th>Stakes</th>
+                      <th class="text-center">Join</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div>PLO</div>
+                      </td>
+                      <td>
+                        <div>50PLOL</div>
+                      </td>
+                      <td>
+                        <div>0/6</div>
+                      </td>
+                      <td>
+                        <div>$.25/$.50</div>
+                      </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-primary">Join</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div>NLH</div>
+                      </td>
+                      <td>
+                        <div>50NLH</div>
+                      </td>
+                      <td>
+                        <div>0/6</div>
+                      </td>
+                      <td>
+                        <div>$.25/$.50</div>
+                      </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-primary">Join</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div>NLH</div>
+                      </td>
+                      <td>
+                        <div>100NLH</div>
+                      </td>
+                      <td>
+                        <div>0/6</div>
+                      </td>
+                      <td>
+                        <div>$.50/$1</div>
+                      </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-primary">Join</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div>PLO</div>
+                      </td>
+                      <td>
+                        <div>100PLO banana</div>
+                      </td>
+                      <td>
+                        <div>0/6</div>
+                      </td>
+                      <td>
+                        <div>$.50/$1</div>
+                      </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-primary">Join</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <!--/.col-->
           </div>
-          <!--/.row-->
+          <!--/.col-->
         </div>
-
+        <!--/.row-->
       </div>
-      <!-- /.container-fluid -->
-    </main>
+
+  </div>
+  <!-- /.container-fluid -->
+  </main>
+  </div>
+
+
+
+  <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="group name">Group Name</label>
+              <input type="text" class="form-control" id="groupName" aria-describedby="emailHelp" placeholder="Group name" value="{{request.form.group_name}}" name="group_name" required>
+              <small class="form-text text-muted">This the name of your group that will be publicly available.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Group Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <input class="btn btn-default" value="Close" type="reset" data-dismiss="modal">
+              <input class="btn btn-primary" value="Create" type="submit">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 
+  <footer class="app-footer">
+    <span><a href="">RaiseFree</a> © 2017</span>
+    <span class="ml-auto">Powered by <a href="#">RaiseFree</a></span>
+  </footer>
 
+  <!-- Bootstrap and necessary plugins -->
+  <script src="../static/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../static/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="../static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../static/node_modules/pace-progress/pace.min.js"></script>
 
-    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
+  <!-- GenesisUI main scripts -->
 
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	      </div>
-	      <div class="modal-body">
-	        <form action="" method="post">
-	            <div class="form-group">
-	                <label for="group name">Group Name</label>
-	                <input type="text" class="form-control" id="groupName" aria-describedby="emailHelp" placeholder="Group name" value="{{request.form.group_name}}" name="group_name" required>
-	                <small class="form-text text-muted">This the name of your group that will be publicly available.</small>
-	            </div>
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">Group Description</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
+  <script src="../static/js/dashboard.js"></script>
 
+  <!-- Plugins and scripts required by this views -->
 
-			<div class="form-group">
-				<input class="btn btn-default" value="Close" type="reset" data-dismiss="modal">
-				<input class="btn btn-primary" value="Create" type="submit">
-
-				</div>
-
-
-	        </form>
-	      </div>
-
-	    </div>
-	  </div>
-	</div>
-
-    <footer class="app-footer">
-        <span><a href="">RaiseFree</a> © 2017</span>
-        <span class="ml-auto">Powered by <a href="#">RaiseFree</a></span>
-    </footer>
-
-    <!-- Bootstrap and necessary plugins -->
-    <script src="../static/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../static/node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../static/node_modules/pace-progress/pace.min.js"></script>
-
-    <!-- GenesisUI main scripts -->
-
-    <script src="../static/js/dashboard.js"></script>
-
-    <!-- Plugins and scripts required by this views -->
-
-    <!-- Custom scripts required by this view -->
-    <script src="../static/js/views/main.js"></script>
+  <!-- Custom scripts required by this view -->
+  <script src="../static/js/views/main.js"></script>
 
 </body>
 
