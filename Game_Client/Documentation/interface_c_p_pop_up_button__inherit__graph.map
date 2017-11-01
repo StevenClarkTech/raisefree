@@ -1,0 +1,5 @@
+<map id="CPPopUpButton" name="CPPopUpButton">
+<area shape="rect" id="node2" href="$interface_c_p_button.html" title="CPButton" alt="" coords="26,152,104,177"/>
+<area shape="rect" id="node3" href="$interface_c_p_control.html" title="CPControl" alt="" coords="24,79,106,104"/>
+<area shape="rect" id="node4" href="$class_c_p_view.html" title="CPView" alt="" coords="31,5,99,31"/>
+</map>

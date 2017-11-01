@@ -1,0 +1,15 @@
+<map id="CPResponder" name="CPResponder">
+<area shape="rect" id="node3" href="$interface_c_p_application.html" title="CPApplication" alt="" coords="5,152,109,177"/>
+<area shape="rect" id="node4" href="$interface_c_p_document.html" title="CPDocument" alt="" coords="134,152,234,177"/>
+<area shape="rect" id="node5" href="$interface_c_p_popover.html" title="CPPopover" alt="" coords="258,152,347,177"/>
+<area shape="rect" id="node6" href="$interface_c_p_view_controller.html" title="CPViewController" alt="" coords="372,152,498,177"/>
+<area shape="rect" id="node8" href="$interface_c_p_window.html" title="CPWindow" alt="" coords="522,152,609,177"/>
+<area shape="rect" id="node14" href="$interface_c_p_window_controller.html" title="CPWindowController" alt="" coords="633,152,778,177"/>
+<area shape="rect" id="node2" href="$class_c_p_object.html" title="CPObject" alt="" coords="329,5,407,31"/>
+<area shape="rect" id="node7" href="$interface_c_p_collection_view_item.html" title="CPCollectionViewItem" alt="" coords="356,225,509,251"/>
+<area shape="rect" id="node9" href="$interface_c_p_panel.html" title="CPPanel" alt="" coords="532,225,606,251"/>
+<area shape="rect" id="node10" href="$interface_c_p_color_panel.html" title="CPColorPanel" alt="" coords="326,299,432,324"/>
+<area shape="rect" id="node11" href="$interface_c_p_font_panel.html" title="CPFontPanel" alt="" coords="455,299,556,324"/>
+<area shape="rect" id="node12" href="$interface_c_p_open_panel.html" title="CPOpenPanel" alt="" coords="580,299,687,324"/>
+<area shape="rect" id="node13" href="$interface_c_p_save_panel.html" title="CPSavePanel" alt="" coords="711,299,815,324"/>
+</map>
