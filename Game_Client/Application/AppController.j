@@ -158,14 +158,18 @@
            [boardView reset];
 
       var array = [[CPArray alloc] init];
-      [array addObject:[self getRandomCard]];
-      [array addObject:@"Qd"];
-      [array addObject:@"Ac"];
-      [array addObject:@"Qh"];
-      [array addObject:@"6s"];
+      for (var i = 0; i < 5; i++) {
+        [array addObject:[self getRandomCard]];
+      }
+
       [boardView setBoardArray:array];
 
       [boardView dealFlop];
+
+
+      [boardView performSelector:@selector(dealTurn) withObject:boardView afterDelay:.6];
+      [boardView performSelector:@selector(dealRiver) withObject:boardView afterDelay:1.2];
+
 }
 
 - (void)clear:(id)sender{
