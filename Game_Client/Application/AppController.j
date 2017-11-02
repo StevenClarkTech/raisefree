@@ -8,7 +8,7 @@
 
 @import <Foundation/Foundation.j>
 @import <AppKit/AppKit.j>
-@import "RFCard.j"
+@import "RFHoleCardContainer.j"
 
 @implementation AppController : CPObject
 {
@@ -16,7 +16,7 @@
     CPMutableArray         playerArray;
     CPMutableArray         cardViewArray;
 
-    RFCard                 card_seat1;
+    RFHoleCardContainer    card_seat1;
     CPView                 contentView;
 
 }
@@ -84,15 +84,13 @@
     var table = [[CPBox alloc] initWithFrame:CGRectMake(0,0,table_width, table_height)];
    // [[table contentView] setBackgroundColor:[CPColor greenColor]];
     [table setCenter:[contentView center]];
-    [table setBorderWidth: 4];
+    [table setBorderWidth: 14];
     [table setBorderType: CPLineBorder];
     [table setBorderColor: [CPColor colorWithHexString:'097d5b']];
     [table setFillColor: [CPColor colorWithHexString:'0c8f68']];
     [table setCornerRadius: table_height/2];
     [table setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     [contentView addSubview:table];
-
-
 
     var label = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
     [label setStringValue:'♣♦♥♠'];
@@ -105,9 +103,7 @@
 
     [self setUpCardViews:contentView forTable:table];
 
-    var button = [[CPButton alloc] initWithFrame: CGRectMake(0, 24,
-                80, 24
-                )];
+    var button = [[CPButton alloc] initWithFrame: CGRectMake(0, 24, 80, 24)];
 
     [button setAutoresizingMask:CPViewMinXMargin |
                             CPViewMaxXMargin |
@@ -115,21 +111,24 @@
                             CPViewMaxYMargin];
 
     [button setTitle:"CLEAR"];
-
     [button setTarget:self];
-    [button setAction:@selector(deal:)];
+    [button setAction:@selector(clear:)];
 
-       var toggle = [[CPButton alloc] initWithFrame: CGRectMake(0 , 0,
-                80, 24
-                )];
+    var toggle = [[CPButton alloc] initWithFrame: CGRectMake(0, 0, 80, 24)];
 
     [toggle setTitle:"TOGGLE"];
     [toggle setTarget:self];
     [toggle setAction:@selector(toggle:)];
 
+    var deal = [[CPButton alloc] initWithFrame: CGRectMake(0, 24*2, 80, 24)];
+    [deal setTitle:"DEAL"];
+    [deal setTarget:self];
+    [deal setAction:@selector(deal:)];
+
 
     [contentView addSubview:button];
-        [contentView addSubview:toggle];
+    [contentView addSubview:deal];
+    [contentView addSubview:toggle];
 
     [theWindow orderFront:self];
     [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
@@ -145,6 +144,16 @@
 }
 
 - (void)deal:(id)sender{
+      
+
+      // deal the flop
+
+      // deal the turn
+
+      // deal the river
+}
+
+- (void)clear:(id)sender{
 
 /*
     var r1 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
@@ -166,7 +175,7 @@
 
     // for 6max
     for (var i = 1; i <= 6; i++) {
-        var card = [[RFCard alloc] init];
+        var card = [[RFHoleCardContainer alloc] init];
         //[test setBackgroundColor:[CPColor greenColor]];
         var origin_x = CGRectGetMinX([table frame]);
         var origin_y = CGRectGetMinY([table frame]);
@@ -243,7 +252,7 @@
 
 }
 
-- (void)sitDown:(RFCard)card{
+- (void)sitDown:(RFHoleCardContainer)card{
 
 //
   [card setEmptySeat:NO];

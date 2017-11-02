@@ -1,4 +1,4 @@
-@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;14359;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);
+@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;15434;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);
 {var the_class = objj_allocateClassPair(CPView, "RFCard"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("card1View", "CPBox"), new objj_ivar("card2View", "CPBox"), new objj_ivar("card1String", "CPString"), new objj_ivar("card2String", "CPString"), new objj_ivar("card1RankLabel", "CPTextField"), new objj_ivar("card2RankLabel", "CPTextField"), new objj_ivar("seatButton", "CPButton"), new objj_ivar("card1SuitLabel", "CPTextField"), new objj_ivar("card2SuitLabel", "CPTextField"), new objj_ivar("playerView", "CPBox"), new objj_ivar("isHeroSeated", "BOOL"), new objj_ivar("showCards", "BOOL"), new objj_ivar("isEmptySeat", "BOOL"), new objj_ivar("hasCards", "BOOL"), new objj_ivar("controller", "AppController"), new objj_ivar("seatNumber", "int"), new objj_ivar("card_width", "float"), new objj_ivar("card_height", "float"), new objj_ivar("card_spacing", "float"), new objj_ivar("playerview_width", "float"), new objj_ivar("playerview_height", "float")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), function $RFCard__isHeroSeated(self, _cmd)
@@ -57,8 +57,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     (self == null ? null : self.isa.objj_msgSend1(self, "addSubview:", self.card2View));
     self.card1RankLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
     self.card2RankLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
-    ((___r1 = self.card1RankLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "boldFontWithName:size:", 'Montserrat', 40)));
-    ((___r1 = self.card2RankLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "boldFontWithName:size:", 'Montserrat', 45)));
     (self == null ? null : self.isa.objj_msgSend1(self, "configureLabel:", self.card1RankLabel));
     (self == null ? null : self.isa.objj_msgSend1(self, "configureLabel:", self.card2RankLabel));
     ((___r1 = self.card1View), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.card1RankLabel));
@@ -92,6 +90,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
 {
     (label == null ? null : label.isa.objj_msgSend0(label, "sizeToFit"));
     (label == null ? null : label.isa.objj_msgSend1(label, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
+    (label == null ? null : label.isa.objj_msgSend1(label, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "boldFontWithName:size:", 'Montserrat', 30)));
 }
 
 ,["void","CPTextField"]), new objj_method(sel_getUid("setCard1String:"), function $RFCard__setCard1String_(self, _cmd, value)
@@ -212,6 +211,29 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
 ,["void","BOOL","CPView","CPTextField"]), new objj_method(sel_getUid("setHeroSeated:"), function $RFCard__setHeroSeated_(self, _cmd, heroSeated)
 {
     self.isHeroSeated = heroSeated;
+    if (self.isEmptySeat == YES)
+    {
+        if (self.isHeroSeated == NO)
+        {
+            ((___r1 = self.seatButton), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
+            ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
+        }
+        else
+        {
+            ((___r1 = self.seatButton), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
+            ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
+        }
+        ((___r1 = self.card1View), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
+        ((___r1 = self.card2View), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
+    }
+    else
+    {
+        ((___r1 = self.seatButton), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
+        ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
+        ((___r1 = self.card1View), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
+        ((___r1 = self.card2View), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
+    }
+    var ___r1;
 }
 
 ,["void","BOOL"])]);
