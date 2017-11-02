@@ -71,7 +71,8 @@
     return self;
 }
 
-- (void)renderPlayerView{
+- (void)renderPlayerView
+{
 	playerView = [[CPBox alloc] initWithFrame:CGRectMake(0,card_height-20,playerview_width,playerview_height)];
 	[playerView setFillColor:[CPColor colorWithHexString:'2c3e50']];
 	[playerView setBorderColor: [CPColor colorWithHexString:'34495e']]; //34495e
@@ -79,14 +80,14 @@
 	[self addSubview:playerView];
 }
 
-- (void)setCard1String:(CPString)value{
-
+- (void)setCard1String:(CPString)value
+{
 	card1String = value;
 	[cardView1 setCardString:value];
 }
 
-- (void)setCard2String:(CPString)value{
-
+- (void)setCard2String:(CPString)value
+{
 	card2String = value;
 	[cardView2 setCardString:value];
 }
@@ -96,7 +97,8 @@
 /*
  *   This renders the view if no one is sitting here 
  */
-- (void)setEmptySeat:(BOOL)empty{
+- (void)setEmptySeat:(BOOL)empty
+{
 	isEmptySeat = empty;
 	if (empty == YES) {
 		if (isHeroSeated == NO) {
@@ -121,18 +123,21 @@
 	}
 }
 
-- (void)sitDownClicked:(id)sender{
+- (void)sitDownClicked:(id)sender
+{
 	[controller sitDown:self];
 }
-- (void)setShowCards:(BOOL)shouldShowCards{
 
+- (void)setShowCards:(BOOL)shouldShowCards
+{
 	showCards  = shouldShowCards;
 
 	[self hideCard:!shouldShowCards withCardView:cardView1];
 	[self hideCard:!shouldShowCards withCardView:cardView2];
 }
 
-- (void)hideCard:(BOOL)hide withCardView:(RFCardView)view{
+- (void)hideCard:(BOOL)hide withCardView:(RFCardView)view
+{
 	if (hide == YES) {
 		[view.cardBox setBorderColor: [CPColor whiteColor]];
 		[view.cardBox setFillColor:[CPColor colorWithHexString:'e74c3c']] ;
@@ -144,7 +149,8 @@
 	}
 }
 
-- (void)setHeroSeated:(BOOL)heroSeated{
+- (void)setHeroSeated:(BOOL)heroSeated
+{
 	isHeroSeated = heroSeated;
 
 	if (isEmptySeat == YES) {
@@ -156,7 +162,6 @@
 			[seatButton setHidden:YES];
 			[playerView setHidden:NO];
 		}
-
 
 	    [cardView1 setHidden:YES];
 	    [cardView2 setHidden:YES];

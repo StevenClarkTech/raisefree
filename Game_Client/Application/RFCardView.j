@@ -8,6 +8,7 @@
 
 	CPBox               cardBox;
 
+    // this is the string to set to display the view (e.g. 'Ac','Ts')
     CPString			cardString @accessors(setter=setCardString);
 
     CPTextField			rankLabel;
@@ -48,7 +49,6 @@
 
 - (void)updateLabelForRankLabel:(CPTextField)textField andCardView:(CPView)cardView withString:(CPString)string{
 
-    CPLog.info(string);
 
     var components = [self formattedStringFromEncoded:string];
     var rank = [components objectAtIndex:0];

@@ -9,6 +9,7 @@
 @import <Foundation/Foundation.j>
 @import <AppKit/AppKit.j>
 @import "RFHoleCardContainer.j"
+@import "RFBoardView.j"
 
 @implementation AppController : CPObject
 {
@@ -18,7 +19,7 @@
 
     RFHoleCardContainer    card_seat1;
     CPView                 contentView;
-
+    RFBoardView            boardView;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -76,8 +77,8 @@
     windowView = [theWindow contentView];
     [windowView setBackgroundColor: [CPColor colorWithHexString:'1b1b1b']];
 
-     contentView = [[CPView alloc] initWithFrame:[windowView frame]];
-     [windowView addSubview:contentView];
+    contentView = [[CPView alloc] initWithFrame:[windowView frame]];
+    [windowView addSubview:contentView];
 
     var table_width = 650;
     var table_height = 400;
@@ -125,10 +126,13 @@
     [deal setTarget:self];
     [deal setAction:@selector(deal:)];
 
+    boardView = [[RFBoardView alloc] init];
+    [boardView setCenter:[contentView center]];
 
     [contentView addSubview:button];
     [contentView addSubview:deal];
     [contentView addSubview:toggle];
+    [contentView addSubview:boardView];
 
     [theWindow orderFront:self];
     [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
@@ -151,6 +155,17 @@
       // deal the turn
 
       // deal the river
+           [boardView reset];
+
+      var array = [[CPArray alloc] init];
+      [array addObject:[self getRandomCard]];
+      [array addObject:@"Qd"];
+      [array addObject:@"Ac"];
+      [array addObject:@"Qh"];
+      [array addObject:@"6s"];
+      [boardView setBoardArray:array];
+
+      [boardView dealFlop];
 }
 
 - (void)clear:(id)sender{
@@ -168,6 +183,15 @@
       cardViewArray.forEach(function(card) {
         [card setEmptySeat:YES];
     });
+
+     [boardView reset];
+
+}
+
+- (CPString)getRandomCard{
+        var r =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
+        var card = [deck objectAtIndex:r];
+        return card;
 
 }
 
@@ -214,11 +238,12 @@
         var r2 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
         var r3 =(Math.random() * Number.MAX_VALUE) % 3; 
 
-        if (r3 == 0)
-        { [card setShowCards:NO];}
-      else{
-        [card setShowCards:YES];
-      }
+        if (r3 == 0){
+          [card setShowCards:NO];
+        }
+        else{
+          [card setShowCards:YES];
+        }
 
         var card1 = [deck objectAtIndex:r1];
         var card2 = [deck objectAtIndex:r2];
