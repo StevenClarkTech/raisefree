@@ -13,8 +13,11 @@
 @implementation AppController : CPObject
 {
     CPMutableArray         deck;
+    CPMutableArray         playerArray;
+    CPMutableArray         cardViewArray;
+
     RFCard                 card_seat1;
-    CPView                  contentView;
+    CPView                 contentView;
 
 }
 
@@ -22,6 +25,10 @@
 {
     
     deck = [[CPMutableArray alloc] init];
+    playerArray = [[CPMutableArray alloc] init];
+    cardViewArray = [[CPMutableArray alloc] init];
+
+
     for (var i = 1; i <= 4; i++)
     {
         for (var j = 1; j <= 13; j++)
@@ -90,7 +97,7 @@
     var label = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
     [label setStringValue:'♣♦♥♠'];
     [label setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
-    [label setFont:[CPFont fontWithName:'Montserrat' size: 57]];
+    [label setFont:[CPFont fontWithName:'Montserrat-Bold' size: 57]];
     [label setTextColor:[CPColor colorWithHexString:'0ea376']];
     [label sizeToFit];
     [label setCenter:CGPointMake(table_width/2, table_height/2)];
@@ -98,9 +105,7 @@
 
     [self setUpCardViews:contentView forTable:table];
 
-    var button = [[CPButton alloc] initWithFrame: CGRectMake(
-                CGRectGetWidth([contentView bounds])/2.0 ,
-                CGRectGetWidth([contentView bounds])/2.0 ,
+    var button = [[CPButton alloc] initWithFrame: CGRectMake(0, 24,
                 80, 24
                 )];
 
@@ -109,21 +114,37 @@
                             CPViewMinYMargin |
                             CPViewMaxYMargin];
 
-    [button setTitle:"Deal"];
+    [button setTitle:"CLEAR"];
 
     [button setTarget:self];
-    [button setAction:@selector(swap:)];
+    [button setAction:@selector(deal:)];
+
+       var toggle = [[CPButton alloc] initWithFrame: CGRectMake(0 , 0,
+                80, 24
+                )];
+
+    [toggle setTitle:"TOGGLE"];
+    [toggle setTarget:self];
+    [toggle setAction:@selector(toggle:)];
+
+
     [contentView addSubview:button];
+        [contentView addSubview:toggle];
 
     [theWindow orderFront:self];
-            [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
-
+    [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
 
     // Uncomment the following line to turn on the standard menu bar.
     //[CPMenu setMenuBarVisible:YES];
 }
 
-- (void)swap:(id)sender{
+- (void)toggle:(id)sender{
+      cardViewArray.forEach(function(card) {
+        [card setShowCards:!card.showCards];
+    });
+}
+
+- (void)deal:(id)sender{
 
 /*
     var r1 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
@@ -135,15 +156,17 @@
     [card_seat1 setCard1String:card1] ;
     [card_seat1 setCard2String:card2] ;*/
 
+      cardViewArray.forEach(function(card) {
+        [card setEmptySeat:YES];
+    });
+
 }
 
 - (void)setUpCardViews:(CPView)view forTable:(CPView)table{
 
-
-
     // for 6max
-        for (var i = 1; i <= 6; i++) {
-    var card = [[RFCard alloc] init];
+    for (var i = 1; i <= 6; i++) {
+        var card = [[RFCard alloc] init];
         //[test setBackgroundColor:[CPColor greenColor]];
         var origin_x = CGRectGetMinX([table frame]);
         var origin_y = CGRectGetMinY([table frame]);
@@ -154,45 +177,76 @@
         x_coord = 0;
         y_coord = 0;
         switch (i)
-             {
-                 case 1:
-                      x_coord = width/3;
-                      break;
-                 case 2:
-                      x_coord = 2*width/3;
-                      break;
-                 case 3:
-                      x_coord = width;
-                      y_coord = height/2;
-                      break;
-                 case 4:
-                      x_coord = 2*width/3;
-                      y_coord = height;
-                      break;
-                 case 5:
-                      x_coord = width/3;
-                      y_coord = height;
-                      break;
-                 case 6:
-                      y_coord = height/2;
-                      break;
-             } 
+        {
+           case 1:
+                x_coord = width/3;
+                break;
+           case 2:
+                x_coord = 2*width/3;
+                break;
+           case 3:
+                x_coord = width;
+                y_coord = height/2;
+                break;
+           case 4:
+                x_coord = 2*width/3;
+                y_coord = height;
+                break;
+           case 5:
+                x_coord = width/3;
+                y_coord = height;
+                break;
+           case 6:
+                y_coord = height/2;
+                break;
+       } 
 
         var r1 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
-    var r2 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
+        var r2 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
+        var r3 =(Math.random() * Number.MAX_VALUE) % 3; 
 
-    var card1 = [deck objectAtIndex:r1];
-    var card2 = [deck objectAtIndex:r2];
+        if (r3 == 0)
+        { [card setShowCards:NO];}
+      else{
+        [card setShowCards:YES];
+      }
 
-    [card setCard1String:card1] ;
-    [card setCard2String:card2] ;
+        var card1 = [deck objectAtIndex:r1];
+        var card2 = [deck objectAtIndex:r2];
+
+        if (r3 == 1) {
+
+        }
+        [card setEmptySeat:NO];
+        [card setHeroSeated: NO] ;
+
+        [cardViewArray addObject:card];
+
+       // [playerArray addObject:card];
+
+        [card setCard1String:card1] ;
+        [card setCard2String:card2] ;
+        [card setController: self];
+        [card setSeatNumber:i]
         [card setCenter:CGPointMake(origin_x+x_coord, origin_y+y_coord)];
         [view addSubview:card];
-           // [card setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
-
-
+               // [card setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     }
+}
 
+- (void)configureSeats{
+
+  for (var object in cardViewArray) {
+    CPLog.info(object);
+  }
+
+
+}
+
+- (void)sitDown:(RFCard)card{
+
+//
+  [card setEmptySeat:NO];
 }
 
 @end
