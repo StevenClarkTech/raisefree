@@ -78,13 +78,16 @@
     [windowView setBackgroundColor: [CPColor colorWithHexString:'1b1b1b']];
 
     contentView = [[CPView alloc] initWithFrame:[windowView frame]];
+    [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin  | CPViewMaxYMargin];
+
     [windowView addSubview:contentView];
 
     var table_width = 650;
     var table_height = 400;
+    var space_top = 100;
     var table = [[CPBox alloc] initWithFrame:CGRectMake(0,0,table_width, table_height)];
    // [[table contentView] setBackgroundColor:[CPColor greenColor]];
-    [table setCenter:[contentView center]];
+    [table setCenter:CGPointMake([contentView center].x, table_height/2 + space_top)];
     [table setBorderWidth: 14];
     [table setBorderType: CPLineBorder];
     [table setBorderColor: [CPColor colorWithHexString:'097d5b']];
@@ -127,7 +130,7 @@
     [deal setAction:@selector(deal:)];
 
     boardView = [[RFBoardView alloc] init];
-    [boardView setCenter:[contentView center]];
+    [boardView setCenter:[table center]];
 
     [contentView addSubview:button];
     [contentView addSubview:deal];
@@ -135,7 +138,6 @@
     [contentView addSubview:boardView];
 
     [theWindow orderFront:self];
-    [contentView setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
 
     // Uncomment the following line to turn on the standard menu bar.
     //[CPMenu setMenuBarVisible:YES];
@@ -241,6 +243,7 @@
         var r1 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
         var r2 =((Math.random() * Number.MAX_VALUE) % ([deck count])); 
         var r3 =(Math.random() * Number.MAX_VALUE) % 3; 
+        var chip_count =(Math.random() * Number.MAX_VALUE) % 9999; 
 
         if (r3 == 0){
           [card setShowCards:NO];
@@ -258,6 +261,22 @@
         [card setEmptySeat:NO];
         [card setHeroSeated: NO] ;
 
+        [card setChipCount:chip_count];
+        if (i == 1) {
+          [card setPlayerString:"Anthony"];
+        }
+        else if (i == 2) {
+          [card setPlayerString:"Austin"];
+        }
+        else if (i == 3) {
+          [card setPlayerString:"Chambers"];
+        }
+        else if (i == 4) {
+          [card setPlayerString:"Jackson"];
+        }
+        else if (i == 5) {
+          [card setPlayerString:"RF"];
+        }
         [cardViewArray addObject:card];
 
        // [playerArray addObject:card];

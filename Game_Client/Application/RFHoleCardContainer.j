@@ -12,11 +12,15 @@
 
     CPString			card1String;
     CPString			card2String;
-
  
+
+    CPString			playerString @accessors(setter=setPlayerString);
+    CPTextField			playerLabel;
+
+    int 				chipCount @accessors(setter=setChipCount);
+    CPTextField			chipCountLabel;
+
 	CPButton            seatButton;
-
-
 
     CPBox				playerView;
 
@@ -36,11 +40,11 @@
 - (id)init
 {
 
-	 playerview_width = 150;
-	 playerview_height = 50;
-	 card_width = CGRectGetWidth([[[RFCardView alloc] init] bounds]);
-	 card_height = CGRectGetHeight([[[RFCardView alloc] init] bounds]);
-	 card_spacing = 5;
+	playerview_width = 150;
+	playerview_height = 55;
+	card_width = CGRectGetWidth([[[RFCardView alloc] init] bounds]);
+	card_height = CGRectGetHeight([[[RFCardView alloc] init] bounds]);
+	card_spacing = 5;
 	self = [super initWithFrame:CGRectMake(0,0,playerview_width,card_height+40)];
 
     cardView1 = [[RFCardView alloc] init];
@@ -50,8 +54,6 @@
     cardView2 = [[RFCardView alloc] init];
     [cardView2 setCenter: CGPointMake(playerview_width/2 + card_spacing/2 + card_width/2, [cardView1 center].y)];
     [self addSubview: cardView2];
-
-	
 
 	seatButton = [[CPButton alloc] initWithFrame: CGRectMake(0,0,card_width*2+10,card_width*2+10)];
 	[seatButton setCenter: [self center]];
@@ -77,8 +79,55 @@
 	[playerView setFillColor:[CPColor colorWithHexString:'2c3e50']];
 	[playerView setBorderColor: [CPColor colorWithHexString:'34495e']]; //34495e
 	//[playerView setCornerRadius: playerview_height/2];
+	var font_size = 13;
+
+	playerLabel = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
+    [playerLabel setStringValue:"Steven4294"];
+    [playerLabel setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
+    [playerLabel setFont:[CPFont fontWithName:'Montserrat' size:font_size]];
+    [playerLabel setTextColor:[CPColor colorWithWhite:1 alpha:.7]];
+    [playerLabel sizeToFit];
+    [playerLabel setCenter:CGPointMake(playerview_width/2, [playerLabel center].y+5)];
+
+    //[playerLabel setAlignment:CPCenterTextAlignment];
+	[playerView addSubview:playerLabel];
+
+	chipCountLabel = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
+    [chipCountLabel setStringValue:"$1000"];
+    [chipCountLabel setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
+    [chipCountLabel setFont:[CPFont fontWithName:'Montserrat' size:font_size]];
+    [chipCountLabel setTextColor:[CPColor colorWithHexString:'f1c40f']];
+    [chipCountLabel sizeToFit];
+    [chipCountLabel setCenter:CGPointMake(playerview_width/2, playerview_height-15)];
+
+	[playerView addSubview:chipCountLabel];
+
+	var seperator = [[CPView alloc] initWithFrame:CGRectMake(0,0,playerview_width-50,2)];
+	[seperator setBackgroundColor:[CPColor colorWithWhite:1 alpha:.1]];
+	[seperator setCenter:CGPointMake(playerview_width/2, playerview_height/2)];
+	[playerView addSubview:seperator];
+
 	[self addSubview:playerView];
 }
+- (void)setPlayerString:(CPString)string{
+	playerString = string;
+    [playerLabel setStringValue:string];
+     [playerLabel sizeToFit];
+    [playerLabel setCenter:CGPointMake(playerview_width/2, [playerLabel center].y)];
+
+
+}
+
+- (void)setChipCount:(int)count{
+	chipCount = count;
+    [chipCountLabel setStringValue:"$"+count];
+    [chipCountLabel sizeToFit];
+    [chipCountLabel setCenter:CGPointMake(playerview_width/2, playerview_height-15)];
+
+    CPLog("should update chip count");
+
+}
+
 
 - (void)setCard1String:(CPString)value
 {
