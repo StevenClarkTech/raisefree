@@ -1,11 +1,12 @@
-@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;21;RFHoleCardContainer.ji;13;RFBoardView.jt;13904;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFHoleCardContainer.j", YES);objj_executeFile("RFBoardView.j", YES);
+@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;21;RFHoleCardContainer.ji;13;RFBoardView.ji;15;RFConsoleView.ji;17;RFObjectManager.jt;16064;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFHoleCardContainer.j", YES);objj_executeFile("RFBoardView.j", YES);objj_executeFile("RFConsoleView.j", YES);objj_executeFile("RFObjectManager.j", YES);
 {var the_class = objj_allocateClassPair(CPObject, "AppController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("deck", "CPMutableArray"), new objj_ivar("playerArray", "CPMutableArray"), new objj_ivar("cardViewArray", "CPMutableArray"), new objj_ivar("card_seat1", "RFHoleCardContainer"), new objj_ivar("contentView", "CPView"), new objj_ivar("boardView", "RFBoardView")]);objj_registerClassPair(the_class);
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("deck", "CPMutableArray"), new objj_ivar("playerArray", "CPMutableArray"), new objj_ivar("cardViewArray", "CPMutableArray"), new objj_ivar("card_seat1", "RFHoleCardContainer"), new objj_ivar("contentView", "CPView"), new objj_ivar("boardView", "RFBoardView"), new objj_ivar("consoleView", "RFConsoleView"), new objj_ivar("objectManager", "RFObjectManager")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLaunching:"), function $AppController__applicationDidFinishLaunching_(self, _cmd, aNotification)
 {
     self.deck = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
     self.playerArray = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
     self.cardViewArray = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
+    self.objectManager = ((___r1 = RFObjectManager.isa.objj_msgSend0(RFObjectManager, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "initWithFakeData"));
     for (var i = 1; i <= 4; i++)
     {
         for (var j = 1; j <= 13; j++)
@@ -51,11 +52,13 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         windowView = (theWindow == null ? null : theWindow.isa.objj_msgSend0(theWindow, "contentView"));
     (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "setBackgroundColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '1b1b1b')));
     self.contentView = ((___r1 = CPView.isa.objj_msgSend0(CPView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", (windowView == null ? null : windowView.isa.objj_msgSend0(windowView, "frame"))));
+    ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMaxYMargin));
     (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "addSubview:", self.contentView));
     var table_width = 650;
     var table_height = 400;
+    var space_top = 100;
     var table = ((___r1 = CPBox.isa.objj_msgSend0(CPBox, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, 0, table_width, table_height)));
-    (table == null ? null : table.isa.objj_msgSend1(table, "setCenter:", ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "center"))));
+    (table == null ? null : table.isa.objj_msgSend1(table, "setCenter:", CGPointMake(((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "center")).x, table_height / 2 + space_top)));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderWidth:", 14));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderType:", CPLineBorder));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '097d5b')));
@@ -63,6 +66,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
     (table == null ? null : table.isa.objj_msgSend1(table, "setCornerRadius:", table_height / 2));
     (table == null ? null : table.isa.objj_msgSend1(table, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", table));
+    var consoleHeight = 250;
+    self.consoleView = ((___r1 = RFConsoleView.isa.objj_msgSend0(RFConsoleView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, CGRectGetHeight(((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "frame"))) - consoleHeight, CGRectGetWidth(((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "frame"))), consoleHeight)));
+    ((___r1 = self.consoleView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinYMargin | CPViewMinXMargin | CPViewMaxXMargin | CPViewWidthSizable));
+    (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "addSubview:", self.consoleView));
     var label = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
     (label == null ? null : label.isa.objj_msgSend1(label, "setStringValue:", '♣♦♥♠'));
     (label == null ? null : label.isa.objj_msgSend1(label, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
@@ -86,13 +93,12 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
     (deal == null ? null : deal.isa.objj_msgSend1(deal, "setTarget:", self));
     (deal == null ? null : deal.isa.objj_msgSend1(deal, "setAction:", sel_getUid("deal:")));
     self.boardView = ((___r1 = RFBoardView.isa.objj_msgSend0(RFBoardView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
-    ((___r1 = self.boardView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", ((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center"))));
+    ((___r1 = self.boardView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", (table == null ? null : table.isa.objj_msgSend0(table, "center"))));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", button));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", deal));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", toggle));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.boardView));
     (theWindow == null ? null : theWindow.isa.objj_msgSend1(theWindow, "orderFront:", self));
-    ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     var ___r1, ___r2;
 }
 
@@ -176,6 +182,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         var r1 = Math.random() * Number.MAX_VALUE % ((___r1 = self.deck), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count"));
         var r2 = Math.random() * Number.MAX_VALUE % ((___r1 = self.deck), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count"));
         var r3 = Math.random() * Number.MAX_VALUE % 3;
+        var chip_count = Math.random() * Number.MAX_VALUE % 9999;
         if (r3 == 0)
         {
             (card == null ? null : card.isa.objj_msgSend1(card, "setShowCards:", NO));
@@ -191,6 +198,19 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         }
         (card == null ? null : card.isa.objj_msgSend1(card, "setEmptySeat:", NO));
         (card == null ? null : card.isa.objj_msgSend1(card, "setHeroSeated:", NO));
+        var key = "seat" + i;
+        var player = ((___r1 = ((___r2 = self.objectManager), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "playerDictionary"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "objectForKey:", key));
+        if (player != CPNull.isa.objj_msgSend0(CPNull, "null"))
+        {
+            CPLog((player == null ? null : player.isa.objj_msgSend0(player, "playerName")));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setPlayerString:", (player == null ? null : player.isa.objj_msgSend0(player, "playerName"))));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setChipCount:", (player == null ? null : player.isa.objj_msgSend0(player, "chipCount"))));
+        }
+        else
+        {
+            (card == null ? null : card.isa.objj_msgSend1(card, "setEmptySeat:", YES));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setHeroSeated:", NO));
+        }
         ((___r1 = self.cardViewArray), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObject:", card));
         (card == null ? null : card.isa.objj_msgSend1(card, "setCard1String:", card1));
         (card == null ? null : card.isa.objj_msgSend1(card, "setCard2String:", card2));
@@ -199,7 +219,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         (card == null ? null : card.isa.objj_msgSend1(card, "setCenter:", CGPointMake(origin_x + x_coord, origin_y + y_coord)));
         (view == null ? null : view.isa.objj_msgSend1(view, "addSubview:", card));
     }
-    var ___r1;
+    var ___r1, ___r2;
 }
 
 ,["void","CPView","CPView"]), new objj_method(sel_getUid("configureSeats"), function $AppController__configureSeats(self, _cmd)

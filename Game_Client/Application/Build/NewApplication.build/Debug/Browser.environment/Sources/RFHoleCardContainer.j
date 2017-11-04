@@ -1,7 +1,27 @@
-@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;12;RFCardView.jt;15576;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFCardView.j", YES);
+@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;12;RFCardView.jt;17196;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFCardView.j", YES);
 {var the_class = objj_allocateClassPair(CPView, "RFHoleCardContainer"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("cardView1", "RFCardView"), new objj_ivar("cardView2", "RFCardView"), new objj_ivar("card1String", "CPString"), new objj_ivar("card2String", "CPString"), new objj_ivar("playerString", "CPString"), new objj_ivar("playerLabel", "CPTextField"), new objj_ivar("chipCount", "int"), new objj_ivar("chipCountLabel", "CPTextField"), new objj_ivar("seatButton", "CPButton"), new objj_ivar("playerView", "CPBox"), new objj_ivar("isHeroSeated", "BOOL"), new objj_ivar("showCards", "BOOL"), new objj_ivar("isEmptySeat", "BOOL"), new objj_ivar("hasCards", "BOOL"), new objj_ivar("controller", "AppController"), new objj_ivar("seatNumber", "int"), new objj_ivar("card_width", "float"), new objj_ivar("card_height", "float"), new objj_ivar("card_spacing", "float"), new objj_ivar("playerview_width", "float"), new objj_ivar("playerview_height", "float")]);objj_registerClassPair(the_class);
-class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), function $RFHoleCardContainer__isHeroSeated(self, _cmd)
+class_addMethods(the_class, [new objj_method(sel_getUid("playerString"), function $RFHoleCardContainer__playerString(self, _cmd)
+{
+    return self.playerString;
+}
+
+,["CPString"]), new objj_method(sel_getUid("setPlayerString:"), function $RFHoleCardContainer__setPlayerString_(self, _cmd, newValue)
+{
+    self.playerString = newValue;
+}
+
+,["void","CPString"]), new objj_method(sel_getUid("chipCount"), function $RFHoleCardContainer__chipCount(self, _cmd)
+{
+    return self.chipCount;
+}
+
+,["int"]), new objj_method(sel_getUid("setChipCount:"), function $RFHoleCardContainer__setChipCount_(self, _cmd, newValue)
+{
+    self.chipCount = newValue;
+}
+
+,["void","int"]), new objj_method(sel_getUid("isHeroSeated"), function $RFHoleCardContainer__isHeroSeated(self, _cmd)
 {
     return self.isHeroSeated;
 }
@@ -78,7 +98,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setBorderColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '34495e')));
     var font_size = 13;
     self.playerLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
-    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "Steven4294"));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat', font_size)));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setTextColor:", CPColor.isa.objj_msgSend2(CPColor, "colorWithWhite:alpha:", 1, .7)));
@@ -86,12 +105,11 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, ((___r2 = self.playerLabel), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center")).y + 5)));
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.playerLabel));
     self.chipCountLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "$1000"));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat-medium', font_size)));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat', font_size)));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setTextColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", 'f1c40f')));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 13)));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 15)));
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.chipCountLabel));
     var seperator = ((___r1 = CPView.isa.objj_msgSend0(CPView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, 0, self.playerview_width - 50, 2)));
     (seperator == null ? null : seperator.isa.objj_msgSend1(seperator, "setBackgroundColor:", CPColor.isa.objj_msgSend2(CPColor, "colorWithWhite:alpha:", 1, .1)));
@@ -101,7 +119,25 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     var ___r1, ___r2;
 }
 
-,["void"]), new objj_method(sel_getUid("setCard1String:"), function $RFHoleCardContainer__setCard1String_(self, _cmd, value)
+,["void"]), new objj_method(sel_getUid("setPlayerString:"), function $RFHoleCardContainer__setPlayerString_(self, _cmd, string)
+{
+    self.playerString = string;
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", string));
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, ((___r2 = self.playerLabel), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center")).y)));
+    var ___r1, ___r2;
+}
+
+,["void","CPString"]), new objj_method(sel_getUid("setChipCount:"), function $RFHoleCardContainer__setChipCount_(self, _cmd, count)
+{
+    self.chipCount = count;
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "$" + count));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 15)));
+    var ___r1;
+}
+
+,["void","int"]), new objj_method(sel_getUid("setCard1String:"), function $RFHoleCardContainer__setCard1String_(self, _cmd, value)
 {
     self.card1String = value;
     ((___r1 = self.cardView1), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCardString:", value));

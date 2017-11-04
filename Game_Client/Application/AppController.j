@@ -10,6 +10,10 @@
 @import <AppKit/AppKit.j>
 @import "RFHoleCardContainer.j"
 @import "RFBoardView.j"
+@import "RFConsoleView.j"
+@import "RFObjectManager.j"
+
+@import "CPWebSocket.j"
 
 @implementation AppController : CPObject
 {
@@ -20,6 +24,8 @@
     RFHoleCardContainer    card_seat1;
     CPView                 contentView;
     RFBoardView            boardView;
+    RFConsoleView          consoleView;
+    RFObjectManager        objectManager;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -28,7 +34,8 @@
     deck = [[CPMutableArray alloc] init];
     playerArray = [[CPMutableArray alloc] init];
     cardViewArray = [[CPMutableArray alloc] init];
-
+    objectManager = [[RFObjectManager alloc] initWithFakeData];
+var webSocket = [CPWebSocket openWebSocketWithURL: @"ws://localhost:8000/index-debug.html" delegate: self]
 
     for (var i = 1; i <= 4; i++)
     {
@@ -96,6 +103,13 @@
     [table setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     [contentView addSubview:table];
 
+    var consoleHeight = 250;
+    consoleView = [[RFConsoleView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight([contentView frame])-consoleHeight,
+      CGRectGetWidth([contentView frame]),consoleHeight)];
+        [consoleView setAutoresizingMask: CPViewMinYMargin | CPViewMinXMargin | CPViewMaxXMargin | CPViewWidthSizable ];
+
+    [windowView addSubview:consoleView];
+
     var label = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
     [label setStringValue:'♣♦♥♠'];
     [label setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
@@ -143,6 +157,27 @@
     //[CPMenu setMenuBarVisible:YES];
 }
 
+
+- (void)webSocketDidOpen: (CPWebSocket)ws
+{
+    CPLog('web socket open: ' + [ws URL]);
+}
+
+- (void)webSocket: (CPWebSocket)ws didReceiveMessage: (CPString)message
+{
+    CPLog('web socket received message: ' + message);
+}
+
+- (void)webSocketDidClose: (CPWebSocket)ws
+{
+    CPLog('web socket closed');
+}
+
+- (void)webSocketDidReceiveError: (CPWebSocket)ws
+{
+    CPLog('web socket error');
+}
+
 - (void)toggle:(id)sender{
       cardViewArray.forEach(function(card) {
         [card setShowCards:!card.showCards];
@@ -157,7 +192,7 @@
       // deal the turn
 
       // deal the river
-           [boardView reset];
+      [boardView reset];
 
       var array = [[CPArray alloc] init];
       for (var i = 0; i < 5; i++) {
@@ -205,7 +240,7 @@
 
     // for 6max
     for (var i = 1; i <= 6; i++) {
-        var card = [[RFHoleCardContainer alloc] init];
+        var cardContainer = [[RFHoleCardContainer alloc] init];
         //[test setBackgroundColor:[CPColor greenColor]];
         var origin_x = CGRectGetMinX([table frame]);
         var origin_y = CGRectGetMinY([table frame]);
@@ -215,6 +250,7 @@
         var x_coord, y_coord;
         x_coord = 0;
         y_coord = 0;
+
         switch (i)
         {
            case 1:
@@ -246,47 +282,47 @@
         var chip_count =(Math.random() * Number.MAX_VALUE) % 9999; 
 
         if (r3 == 0){
-          [card setShowCards:NO];
+          [cardContainer setShowCards:NO];
         }
         else{
-          [card setShowCards:YES];
+          [cardContainer setShowCards:YES];
         }
 
         var card1 = [deck objectAtIndex:r1];
         var card2 = [deck objectAtIndex:r2];
 
-        if (r3 == 1) {
+    
+        [cardContainer setEmptySeat:NO];
+        [cardContainer setHeroSeated: NO] ;
+
+        var key = "seat" + i;
+
+        var player = [[objectManager playerDictionary] objectForKey:key];
+        if (player != [CPNull null]) {
+          CPLog([player playerName]);
+
+            [cardContainer setPlayerString:[player playerName]];
+            [cardContainer setChipCount:[player chipCount]];
+
 
         }
-        [card setEmptySeat:NO];
-        [card setHeroSeated: NO] ;
+        else{
+          // the player object is null (no one is sitting here)
+          // configure empty seat
+             [cardContainer setEmptySeat:  YES];
+            [cardContainer setHeroSeated: NO] ;
+        }
+        
 
-        [card setChipCount:chip_count];
-        if (i == 1) {
-          [card setPlayerString:"Anthony"];
-        }
-        else if (i == 2) {
-          [card setPlayerString:"Austin"];
-        }
-        else if (i == 3) {
-          [card setPlayerString:"Chambers"];
-        }
-        else if (i == 4) {
-          [card setPlayerString:"Jackson"];
-        }
-        else if (i == 5) {
-          [card setPlayerString:"RF"];
-        }
-        [cardViewArray addObject:card];
+        [cardViewArray addObject:cardContainer];
 
-       // [playerArray addObject:card];
 
-        [card setCard1String:card1] ;
-        [card setCard2String:card2] ;
-        [card setController: self];
-        [card setSeatNumber:i]
-        [card setCenter:CGPointMake(origin_x+x_coord, origin_y+y_coord)];
-        [view addSubview:card];
+        [cardContainer setCard1String:card1] ;
+        [cardContainer setCard2String:card2] ;
+        [cardContainer setController: self];
+        [cardContainer setSeatNumber:i]
+        [cardContainer setCenter:CGPointMake(origin_x+x_coord, origin_y+y_coord)];
+        [view addSubview:cardContainer];
                // [card setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     }
 }
@@ -303,6 +339,8 @@
 - (void)sitDown:(RFHoleCardContainer)card{
 
 //
+  var seatNumber = [card seatNumber];
+  [[objectManager playerDictionary] setObject:[objectManager hero] forKey:"seat"+seatNumber];
   [card setEmptySeat:NO];
 }
 

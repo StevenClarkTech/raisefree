@@ -39,7 +39,6 @@
 
 - (id)init
 {
-
 	playerview_width = 150;
 	playerview_height = 55;
 	card_width = CGRectGetWidth([[[RFCardView alloc] init] bounds]);
@@ -82,19 +81,13 @@
 	var font_size = 13;
 
 	playerLabel = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
-    [playerLabel setStringValue:"Steven4294"];
-    [playerLabel setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     [playerLabel setFont:[CPFont fontWithName:'Montserrat' size:font_size]];
     [playerLabel setTextColor:[CPColor colorWithWhite:1 alpha:.7]];
     [playerLabel sizeToFit];
     [playerLabel setCenter:CGPointMake(playerview_width/2, [playerLabel center].y+5)];
-
-    //[playerLabel setAlignment:CPCenterTextAlignment];
 	[playerView addSubview:playerLabel];
 
 	chipCountLabel = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
-    [chipCountLabel setStringValue:"$1000"];
-    [chipCountLabel setAutoresizingMask:CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin];
     [chipCountLabel setFont:[CPFont fontWithName:'Montserrat' size:font_size]];
     [chipCountLabel setTextColor:[CPColor colorWithHexString:'f1c40f']];
     [chipCountLabel sizeToFit];
@@ -112,10 +105,8 @@
 - (void)setPlayerString:(CPString)string{
 	playerString = string;
     [playerLabel setStringValue:string];
-     [playerLabel sizeToFit];
+    [playerLabel sizeToFit];
     [playerLabel setCenter:CGPointMake(playerview_width/2, [playerLabel center].y)];
-
-
 }
 
 - (void)setChipCount:(int)count{
@@ -123,9 +114,6 @@
     [chipCountLabel setStringValue:"$"+count];
     [chipCountLabel sizeToFit];
     [chipCountLabel setCenter:CGPointMake(playerview_width/2, playerview_height-15)];
-
-    CPLog("should update chip count");
-
 }
 
 

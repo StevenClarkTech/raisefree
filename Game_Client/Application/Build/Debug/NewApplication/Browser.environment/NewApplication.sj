@@ -1,11 +1,12 @@
-@STATIC;1.0;p;15;AppController.jt;14016;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;21;RFHoleCardContainer.ji;13;RFBoardView.jt;13904;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFHoleCardContainer.j", YES);objj_executeFile("RFBoardView.j", YES);
+@STATIC;1.0;p;15;AppController.jt;16218;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;21;RFHoleCardContainer.ji;13;RFBoardView.ji;15;RFConsoleView.ji;17;RFObjectManager.jt;16064;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFHoleCardContainer.j", YES);objj_executeFile("RFBoardView.j", YES);objj_executeFile("RFConsoleView.j", YES);objj_executeFile("RFObjectManager.j", YES);
 {var the_class = objj_allocateClassPair(CPObject, "AppController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("deck", "CPMutableArray"), new objj_ivar("playerArray", "CPMutableArray"), new objj_ivar("cardViewArray", "CPMutableArray"), new objj_ivar("card_seat1", "RFHoleCardContainer"), new objj_ivar("contentView", "CPView"), new objj_ivar("boardView", "RFBoardView")]);objj_registerClassPair(the_class);
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("deck", "CPMutableArray"), new objj_ivar("playerArray", "CPMutableArray"), new objj_ivar("cardViewArray", "CPMutableArray"), new objj_ivar("card_seat1", "RFHoleCardContainer"), new objj_ivar("contentView", "CPView"), new objj_ivar("boardView", "RFBoardView"), new objj_ivar("consoleView", "RFConsoleView"), new objj_ivar("objectManager", "RFObjectManager")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLaunching:"), function $AppController__applicationDidFinishLaunching_(self, _cmd, aNotification)
 {
     self.deck = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
     self.playerArray = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
     self.cardViewArray = ((___r1 = CPMutableArray.isa.objj_msgSend0(CPMutableArray, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
+    self.objectManager = ((___r1 = RFObjectManager.isa.objj_msgSend0(RFObjectManager, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "initWithFakeData"));
     for (var i = 1; i <= 4; i++)
     {
         for (var j = 1; j <= 13; j++)
@@ -51,11 +52,13 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         windowView = (theWindow == null ? null : theWindow.isa.objj_msgSend0(theWindow, "contentView"));
     (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "setBackgroundColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '1b1b1b')));
     self.contentView = ((___r1 = CPView.isa.objj_msgSend0(CPView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", (windowView == null ? null : windowView.isa.objj_msgSend0(windowView, "frame"))));
+    ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMaxYMargin));
     (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "addSubview:", self.contentView));
     var table_width = 650;
     var table_height = 400;
+    var space_top = 100;
     var table = ((___r1 = CPBox.isa.objj_msgSend0(CPBox, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, 0, table_width, table_height)));
-    (table == null ? null : table.isa.objj_msgSend1(table, "setCenter:", ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "center"))));
+    (table == null ? null : table.isa.objj_msgSend1(table, "setCenter:", CGPointMake(((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "center")).x, table_height / 2 + space_top)));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderWidth:", 14));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderType:", CPLineBorder));
     (table == null ? null : table.isa.objj_msgSend1(table, "setBorderColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '097d5b')));
@@ -63,6 +66,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
     (table == null ? null : table.isa.objj_msgSend1(table, "setCornerRadius:", table_height / 2));
     (table == null ? null : table.isa.objj_msgSend1(table, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", table));
+    var consoleHeight = 250;
+    self.consoleView = ((___r1 = RFConsoleView.isa.objj_msgSend0(RFConsoleView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, CGRectGetHeight(((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "frame"))) - consoleHeight, CGRectGetWidth(((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "frame"))), consoleHeight)));
+    ((___r1 = self.consoleView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinYMargin | CPViewMinXMargin | CPViewMaxXMargin | CPViewWidthSizable));
+    (windowView == null ? null : windowView.isa.objj_msgSend1(windowView, "addSubview:", self.consoleView));
     var label = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
     (label == null ? null : label.isa.objj_msgSend1(label, "setStringValue:", '♣♦♥♠'));
     (label == null ? null : label.isa.objj_msgSend1(label, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
@@ -86,13 +93,12 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
     (deal == null ? null : deal.isa.objj_msgSend1(deal, "setTarget:", self));
     (deal == null ? null : deal.isa.objj_msgSend1(deal, "setAction:", sel_getUid("deal:")));
     self.boardView = ((___r1 = RFBoardView.isa.objj_msgSend0(RFBoardView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
-    ((___r1 = self.boardView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", ((___r2 = self.contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center"))));
+    ((___r1 = self.boardView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", (table == null ? null : table.isa.objj_msgSend0(table, "center"))));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", button));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", deal));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", toggle));
     ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.boardView));
     (theWindow == null ? null : theWindow.isa.objj_msgSend1(theWindow, "orderFront:", self));
-    ((___r1 = self.contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     var ___r1, ___r2;
 }
 
@@ -176,6 +182,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         var r1 = Math.random() * Number.MAX_VALUE % ((___r1 = self.deck), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count"));
         var r2 = Math.random() * Number.MAX_VALUE % ((___r1 = self.deck), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count"));
         var r3 = Math.random() * Number.MAX_VALUE % 3;
+        var chip_count = Math.random() * Number.MAX_VALUE % 9999;
         if (r3 == 0)
         {
             (card == null ? null : card.isa.objj_msgSend1(card, "setShowCards:", NO));
@@ -191,6 +198,19 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         }
         (card == null ? null : card.isa.objj_msgSend1(card, "setEmptySeat:", NO));
         (card == null ? null : card.isa.objj_msgSend1(card, "setHeroSeated:", NO));
+        var key = "seat" + i;
+        var player = ((___r1 = ((___r2 = self.objectManager), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "playerDictionary"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "objectForKey:", key));
+        if (player != CPNull.isa.objj_msgSend0(CPNull, "null"))
+        {
+            CPLog((player == null ? null : player.isa.objj_msgSend0(player, "playerName")));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setPlayerString:", (player == null ? null : player.isa.objj_msgSend0(player, "playerName"))));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setChipCount:", (player == null ? null : player.isa.objj_msgSend0(player, "chipCount"))));
+        }
+        else
+        {
+            (card == null ? null : card.isa.objj_msgSend1(card, "setEmptySeat:", YES));
+            (card == null ? null : card.isa.objj_msgSend1(card, "setHeroSeated:", NO));
+        }
         ((___r1 = self.cardViewArray), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObject:", card));
         (card == null ? null : card.isa.objj_msgSend1(card, "setCard1String:", card1));
         (card == null ? null : card.isa.objj_msgSend1(card, "setCard2String:", card2));
@@ -199,7 +219,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("applicationDidFinishLau
         (card == null ? null : card.isa.objj_msgSend1(card, "setCenter:", CGPointMake(origin_x + x_coord, origin_y + y_coord)));
         (view == null ? null : view.isa.objj_msgSend1(view, "addSubview:", card));
     }
-    var ___r1;
+    var ___r1, ___r2;
 }
 
 ,["void","CPView","CPView"]), new objj_method(sel_getUid("configureSeats"), function $AppController__configureSeats(self, _cmd)
@@ -379,10 +399,48 @@ class_addMethods(the_class, [new objj_method(sel_getUid("cardString"), function 
 
 ,["CPArray","CPString"])]);
 }
-p;21;RFHoleCardContainer.jt;15661;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;12;RFCardView.jt;15576;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFCardView.j", YES);
+p;15;RFConsoleView.jt;1659;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;1592;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);
+{var the_class = objj_allocateClassPair(CPView, "RFConsoleView"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("slider", "CPSlider")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("initWithFrame:"), function $RFConsoleView__initWithFrame_(self, _cmd, frame)
+{
+    self = objj_msgSendSuper1({ receiver:self, super_class:objj_getClass("RFConsoleView").super_class }, "initWithFrame:", frame);
+    (self == null ? null : self.isa.objj_msgSend1(self, "setBackgroundColor:", ((___r1 = CPColor.isa.objj_msgSend0(CPColor, "whiteColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "colorWithAlphaComponent:", .08))));
+    self.slider = ((___r1 = CPSlider.isa.objj_msgSend0(CPSlider, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(CGRectGetWidth(frame) - 200, 0, 200, 50)));
+    ((___r1 = self.slider), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
+    (self == null ? null : self.isa.objj_msgSend1(self, "addSubview:", self.slider));
+    ((___r1 = self.slider), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "setValue:forThemeAttribute:", 20, "track-width"));
+    ((___r1 = self.slider), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "setValue:forThemeAttribute:", CGSizeMake(50, 50), "knob-size"));
+    return self;
+    var ___r1;
+}
+
+,["id","CGRect"])]);
+}
+p;21;RFHoleCardContainer.jt;17281;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;12;RFCardView.jt;17196;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFCardView.j", YES);
 {var the_class = objj_allocateClassPair(CPView, "RFHoleCardContainer"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("cardView1", "RFCardView"), new objj_ivar("cardView2", "RFCardView"), new objj_ivar("card1String", "CPString"), new objj_ivar("card2String", "CPString"), new objj_ivar("playerString", "CPString"), new objj_ivar("playerLabel", "CPTextField"), new objj_ivar("chipCount", "int"), new objj_ivar("chipCountLabel", "CPTextField"), new objj_ivar("seatButton", "CPButton"), new objj_ivar("playerView", "CPBox"), new objj_ivar("isHeroSeated", "BOOL"), new objj_ivar("showCards", "BOOL"), new objj_ivar("isEmptySeat", "BOOL"), new objj_ivar("hasCards", "BOOL"), new objj_ivar("controller", "AppController"), new objj_ivar("seatNumber", "int"), new objj_ivar("card_width", "float"), new objj_ivar("card_height", "float"), new objj_ivar("card_spacing", "float"), new objj_ivar("playerview_width", "float"), new objj_ivar("playerview_height", "float")]);objj_registerClassPair(the_class);
-class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), function $RFHoleCardContainer__isHeroSeated(self, _cmd)
+class_addMethods(the_class, [new objj_method(sel_getUid("playerString"), function $RFHoleCardContainer__playerString(self, _cmd)
+{
+    return self.playerString;
+}
+
+,["CPString"]), new objj_method(sel_getUid("setPlayerString:"), function $RFHoleCardContainer__setPlayerString_(self, _cmd, newValue)
+{
+    self.playerString = newValue;
+}
+
+,["void","CPString"]), new objj_method(sel_getUid("chipCount"), function $RFHoleCardContainer__chipCount(self, _cmd)
+{
+    return self.chipCount;
+}
+
+,["int"]), new objj_method(sel_getUid("setChipCount:"), function $RFHoleCardContainer__setChipCount_(self, _cmd, newValue)
+{
+    self.chipCount = newValue;
+}
+
+,["void","int"]), new objj_method(sel_getUid("isHeroSeated"), function $RFHoleCardContainer__isHeroSeated(self, _cmd)
 {
     return self.isHeroSeated;
 }
@@ -459,7 +517,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setBorderColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", '34495e')));
     var font_size = 13;
     self.playerLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
-    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "Steven4294"));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat', font_size)));
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setTextColor:", CPColor.isa.objj_msgSend2(CPColor, "colorWithWhite:alpha:", 1, .7)));
@@ -467,12 +524,11 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, ((___r2 = self.playerLabel), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center")).y + 5)));
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.playerLabel));
     self.chipCountLabel = ((___r1 = CPTextField.isa.objj_msgSend0(CPTextField, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMakeZero()));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "$1000"));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setAutoresizingMask:", CPViewMinXMargin | CPViewMaxXMargin | CPViewMinYMargin | CPViewMaxYMargin));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat-medium', font_size)));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFont:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", 'Montserrat', font_size)));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setTextColor:", CPColor.isa.objj_msgSend1(CPColor, "colorWithHexString:", 'f1c40f')));
     ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
-    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 13)));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 15)));
     ((___r1 = self.playerView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", self.chipCountLabel));
     var seperator = ((___r1 = CPView.isa.objj_msgSend0(CPView, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, 0, self.playerview_width - 50, 2)));
     (seperator == null ? null : seperator.isa.objj_msgSend1(seperator, "setBackgroundColor:", CPColor.isa.objj_msgSend2(CPColor, "colorWithWhite:alpha:", 1, .1)));
@@ -482,7 +538,25 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
     var ___r1, ___r2;
 }
 
-,["void"]), new objj_method(sel_getUid("setCard1String:"), function $RFHoleCardContainer__setCard1String_(self, _cmd, value)
+,["void"]), new objj_method(sel_getUid("setPlayerString:"), function $RFHoleCardContainer__setPlayerString_(self, _cmd, string)
+{
+    self.playerString = string;
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", string));
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
+    ((___r1 = self.playerLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, ((___r2 = self.playerLabel), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "center")).y)));
+    var ___r1, ___r2;
+}
+
+,["void","CPString"]), new objj_method(sel_getUid("setChipCount:"), function $RFHoleCardContainer__setChipCount_(self, _cmd, count)
+{
+    self.chipCount = count;
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setStringValue:", "$" + count));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "sizeToFit"));
+    ((___r1 = self.chipCountLabel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCenter:", CGPointMake(self.playerview_width / 2, self.playerview_height - 15)));
+    var ___r1;
+}
+
+,["void","int"]), new objj_method(sel_getUid("setCard1String:"), function $RFHoleCardContainer__setCard1String_(self, _cmd, value)
 {
     self.card1String = value;
     ((___r1 = self.cardView1), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setCardString:", value));
@@ -582,5 +656,79 @@ class_addMethods(the_class, [new objj_method(sel_getUid("isHeroSeated"), functio
 }
 
 ,["void","BOOL"])]);
+}
+p;17;RFObjectManager.jt;2522;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;10;RFPlayer.jt;2440;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RFPlayer.j", YES);
+{var the_class = objj_allocateClassPair(CPObject, "RFObjectManager"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("playerDictionary", "CPDictionary")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("playerDictionary"), function $RFObjectManager__playerDictionary(self, _cmd)
+{
+    return self.playerDictionary;
+}
+
+,["CPDictionary"]), new objj_method(sel_getUid("setPlayerDictionary:"), function $RFObjectManager__setPlayerDictionary_(self, _cmd, newValue)
+{
+    self.playerDictionary = newValue;
+}
+
+,["void","CPDictionary"]), new objj_method(sel_getUid("init"), function $RFObjectManager__init(self, _cmd)
+{
+    self = objj_msgSendSuper0({ receiver:self, super_class:objj_getClass("RFObjectManager").super_class }, "init");
+    self.playerDictionary = (___r1 = CPDictionary.isa.objj_msgSend0(CPDictionary, "alloc"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "initWithObjects:forKeys:", [CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null")], ["seat1", "seat2", "seat3", "seat4", "seat5", "seat6"]));
+    return self;
+    var ___r1;
+}
+
+,["id"]), new objj_method(sel_getUid("initWithFakeData"), function $RFObjectManager__initWithFakeData(self, _cmd)
+{
+    self = objj_msgSendSuper0({ receiver:self, super_class:objj_getClass("RFObjectManager").super_class }, "init");
+    self.playerDictionary = (___r1 = CPDictionary.isa.objj_msgSend0(CPDictionary, "alloc"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "initWithObjects:forKeys:", [((___r2 = RFPlayer.isa.objj_msgSend0(RFPlayer, "alloc")), ___r2 == null ? null : ___r2.isa.objj_msgSend2(___r2, "initWithName:andChips:", "Jake", 3183)), CPNull.isa.objj_msgSend0(CPNull, "null"), ((___r2 = RFPlayer.isa.objj_msgSend0(RFPlayer, "alloc")), ___r2 == null ? null : ___r2.isa.objj_msgSend2(___r2, "initWithName:andChips:", "Anthony", 1337)), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null"), CPNull.isa.objj_msgSend0(CPNull, "null")], ["seat1", "seat2", "seat3", "seat4", "seat5", "seat6"]));
+    return self;
+    var ___r1, ___r2;
+}
+
+,["id"])]);
+}
+p;10;RFPlayer.jt;1697;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;1630;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);
+{var the_class = objj_allocateClassPair(CPObject, "RFPlayer"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("playerName", "CPString"), new objj_ivar("chipCount", "int"), new objj_ivar("balanceRemaining", "int")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("playerName"), function $RFPlayer__playerName(self, _cmd)
+{
+    return self.playerName;
+}
+
+,["CPString"]), new objj_method(sel_getUid("setPlayerName:"), function $RFPlayer__setPlayerName_(self, _cmd, newValue)
+{
+    self.playerName = newValue;
+}
+
+,["void","CPString"]), new objj_method(sel_getUid("chipCount"), function $RFPlayer__chipCount(self, _cmd)
+{
+    return self.chipCount;
+}
+
+,["int"]), new objj_method(sel_getUid("setChipCount:"), function $RFPlayer__setChipCount_(self, _cmd, newValue)
+{
+    self.chipCount = newValue;
+}
+
+,["void","int"]), new objj_method(sel_getUid("balanceRemaining"), function $RFPlayer__balanceRemaining(self, _cmd)
+{
+    return self.balanceRemaining;
+}
+
+,["int"]), new objj_method(sel_getUid("setBalanceRemaining:"), function $RFPlayer__setBalanceRemaining_(self, _cmd, newValue)
+{
+    self.balanceRemaining = newValue;
+}
+
+,["void","int"]), new objj_method(sel_getUid("initWithName:andChips:"), function $RFPlayer__initWithName_andChips_(self, _cmd, name, chips)
+{
+    self = objj_msgSendSuper0({ receiver:self, super_class:objj_getClass("RFPlayer").super_class }, "init");
+    self.playerName = name;
+    self.chipCount = chips;
+    return self;
+}
+
+,["id","CPString","int"])]);
 }
 e;
