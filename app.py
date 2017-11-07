@@ -155,6 +155,10 @@ def logout():
 	flash('You were just logged out')
 	return redirect(url_for('dashboard'))
 
+@app.route('/table_test')
+def table_test():
+	return render_template('tableview.html')
+
 
 
 #start the server with the 'run()' method
